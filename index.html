@@ -9,10 +9,36 @@
     <title>Desafío Clase 5</title>
 </head>
 <body>
-    <div class="bgimg">
-        <h1>IMC Calculator</h1>
+        <h1>Calcula tu indice de masa corporal (IMC)</h1>
+        <section>
+            <form>
+                <fieldset>
+                    <h2>Ingresa tus datos para conocer tu indice de masa corporal (IMC)</h2>
+                    <p class="instruccion">Recuerde ingresar su peso en kilogramos y su estatura en metros.</p>
+                    <p>
+                        <label for="username">Nombre:
+                        <input type="text" name="name" id="username">
+                        </label>
+                    </p>
+                    <p>
+                        <label for="userWeight">Peso: 
+                            <input type="text" name="weight" id="userWeight" placeholder="Ingrese su peso en kg" required>
+                            kg
+                        </label>
+                    <p>
+                        <label for="userHeight">Estatura:
+                            <input type="text" name="height" id="userHeight" placeholder="Ingrese su estatura en m" required>
+                            m
+                        </label>
+                    </p>
+                    <button type="submit" id="enviar">
+                        Enviar
+                    </button>
+                </fieldset>
+            </form>
+            
+        </section>
     <!-- Javascript -->
-    </div>
     <script src="main.js"></script>   
 </body>
 </html>

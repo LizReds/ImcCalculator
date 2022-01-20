@@ -3,17 +3,67 @@ body, html  {
     margin: 0;
 }
 
-.bgimg {
-    background-image: url(https://cdn.pixabay.com/photo/2018/02/20/17/29/fitness-3168246_960_720.jpg);
+
+body {
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),  url(https://cdn.pixabay.com/photo/2018/02/20/17/29/fitness-3168246_960_720.jpg);
     height: 100%;
-    opacity: 0.65;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-h1 {
-    margin: 0;
+form {
+    margin: 0 auto;
+    width: 400px;
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
 }
 
 
+h1 {
+    margin: 0;
+    padding: 1em;
+    color: #1c7e09;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.3em;
+    color: #064635;
+}
+
+.instruccion {
+    color: #064635;
+    font-size: 1.2em;
+}
+
+p {
+    color: #C84B31;
+    font-size: 1.2em;
+}
+
+#username, #userHeight {
+    margin-left: 5em;
+}
+
+#userWeight {
+    margin-left: 6.9em;
+}
+
+form {
+    fieldset {
+        button {
+            margin: 0 auto;
+            margin-top: 2em;
+            display: flex;
+            justify-content: center;
+            padding: 0.5em 1em;
+            border-radius: 1em;
+            border-color: #C84B31;
+            color: #C84B31;
+            background-color: #F6D860;
+        }
+    }
+}

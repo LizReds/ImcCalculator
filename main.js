@@ -1,16 +1,27 @@
-function datosNumeros (mensaje){
-    let datoTexto = prompt (mensaje);
-    datoDecimal = parseFloat(datoTexto);
-    return datoDecimal;
+class Datos {
+    constructor(){
+        this.DatosUsuario = [];
+    }
+
+    obtenerDatos(id, val){
+        let datoObtenido = document.getElementById(id);
+        //Esto se cambia cuando se obtenga la información con eventos
+        datoObtenido.value = val;
+        if(datoObtenido == +datoObtenido){
+        datoObtenido = parseFloat(datoObtenido);
+        }
+        this.DatosUsuario.push(datoObtenido)
+    }
+
+    realizarFormula(arr){
+        let resultado = arr[1] / (arr[2] * arr[2]);
+        console.log ("El IMC de " + arr[0] + " es " + resultado );
+        return resultado
+    }
 }
 
-function resultadoFormula (nombre, peso, estatura) {
-    let resultado = peso / (estatura * estatura);
-    console.log ("El IMC de " + nombre + " es " + resultado );
-    return resultado
-}
 
-let mensajesResultado = {
+const mensajesResultado = {
     desnutricionSevera: "Su IMC indica desnutrición severa. Consulte a su médico.",
     desnutricionModerada: "Su IMC indica desnutrición moderada. Consulte a su médico.",
     bajoPeso: "Su IMC indica bajo peso. Consulte a su médico.",
@@ -52,28 +63,18 @@ function estadoImc(valorCalculo) {
     } 
 }
 
-const pedirDatos = ["Ingrese su nombre","Ingrese su peso en kg", "Ingrese su estatura en metros"];
-let datosUsuario = [];
-
-for (let i = 0; i <= 2; i++) {
-    let datoRecibido;
-    
-    if (i == 0) {
-        datoRecibido = prompt (pedirDatos[i])
-    }
-    else {
-        datoRecibido = datosNumeros(pedirDatos[i])
-    }
-    datosUsuario.push (datoRecibido)
-}
-
-let calculoImc = resultadoFormula (datosUsuario[0], datosUsuario [1], datosUsuario[2]);
-
-console.log (estadoImc (calculoImc))
 
 
+;
 
+let calculoImc
+let usuario1 = new Datos;
+usuario1.obtenerDatos("username", "Ricardo");
+usuario1.obtenerDatos("userWeight", "85.7");
+usuario1.obtenerDatos("userHeight", "1.76");
+calculoImc = usuario1.realizarFormula(usuario1.DatosUsuario)
 
+console.log(estadoImc(calculoImc))
 
 
 
