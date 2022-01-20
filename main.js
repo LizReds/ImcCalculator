@@ -64,9 +64,6 @@ function estadoImc(valorCalculo) {
 }
 
 
-
-;
-
 let calculoImc
 let usuario1 = new Datos;
 usuario1.obtenerDatos("username", "Ricardo");
@@ -75,6 +72,3 @@ usuario1.obtenerDatos("userHeight", "1.76");
 calculoImc = usuario1.realizarFormula(usuario1.DatosUsuario)
 
 console.log(estadoImc(calculoImc))
-
-
-
