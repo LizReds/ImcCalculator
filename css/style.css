@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400&display=swap");
 body, html {
   height: 100%;
   margin: 0;
@@ -15,8 +16,10 @@ form {
   margin: 0 auto;
   width: 400px;
   padding: 1em;
-  border: 1px solid #CCC;
+  border: 1px solid #cccccc;
   border-radius: 1em;
+  background-color: #9de49a;
+  opacity: 0.85;
 }
 
 h1 {
@@ -24,22 +27,44 @@ h1 {
   padding: 1em;
   color: #1c7e09;
   text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
 }
 
 h2 {
   text-align: center;
   font-size: 1.3em;
   color: #064635;
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
 }
 
 .instruccion {
   color: #064635;
   font-size: 1.2em;
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
 }
 
 p {
   color: #C84B31;
   font-size: 1.2em;
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
+}
+
+.messageContainer {
+  font-weight: 400;
+  background: #C84B31;
+  padding: 20px;
+  margin: 2em 20em;
+  border-radius: 35px 0px 35px 0px;
+  border: 2px solid #1c7e09;
+}
+
+#mensaje1, #mensaje2 {
+  text-align: center;
+  color: #9de49a;
 }
 
 #username, #userHeight {
@@ -60,6 +85,16 @@ form fieldset button {
   border-color: #C84B31;
   color: #C84B31;
   background-color: #F6D860;
+}
+
+#userWeight, #username, #userHeight {
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+}
+
+input {
+  border-radius: 0.3em;
+  background-color: #efb26c;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,34 +9,40 @@
     <title>Desafío Clase 5</title>
 </head>
 <body>
-        <h1>Calcula tu indice de masa corporal (IMC)</h1>
+        <h1>Calcule su índice de masa corporal (IMC)</h1>
         <section>
-            <form>
+            <form id="form">
                 <fieldset>
-                    <h2>Ingresa tus datos para conocer tu indice de masa corporal (IMC)</h2>
+                    <h2>Ingrese sus datos para conocer su índice de masa corporal (IMC)</h2>
                     <p class="instruccion">Recuerde ingresar su peso en kilogramos y su estatura en metros.</p>
-                    <p>
-                        <label for="username">Nombre:
-                        <input type="text" name="name" id="username">
-                        </label>
-                    </p>
-                    <p>
-                        <label for="userWeight">Peso: 
-                            <input type="text" name="weight" id="userWeight" placeholder="Ingrese su peso en kg" required>
-                            kg
-                        </label>
-                    <p>
-                        <label for="userHeight">Estatura:
-                            <input type="text" name="height" id="userHeight" placeholder="Ingrese su estatura en m" required>
-                            m
-                        </label>
-                    </p>
+                    <div id="data">
+                        <p>
+                            <label for="username">Nombre:
+                            <input type="text" name="name" id="username">
+                            </label>
+                        </p>
+                        <p>
+                            <label for="userWeight">Peso: 
+                                <input type="text" name="weight" id="userWeight" placeholder="Ingrese su peso en kg" required>
+                                kg
+                            </label>
+                        <p>
+                            <label for="userHeight">Estatura:
+                                <input type="text" name="height" id="userHeight" placeholder="Ingrese su estatura en m" required>
+                                m
+                            </label>
+                        </p>
+                    </div>
+                    
                     <button type="submit" id="enviar">
                         Enviar
                     </button>
                 </fieldset>
             </form>
-            
+            <div class="messageContainer">
+                <p id="mensaje1"></p>
+                <p id="mensaje2"></p>
+            </div>
         </section>
     <!-- Javascript -->
     <script src="main.js"></script>   

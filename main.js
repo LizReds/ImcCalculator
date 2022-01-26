@@ -1,22 +1,49 @@
 class Datos {
     constructor(){
-        this.DatosUsuario = [];
+        this.datosUsuario = [];
     }
 
-    obtenerDatos(id, val){
-        let datoObtenido = document.getElementById(id);
-        //Esto se cambia cuando se obtenga la información con eventos
-        datoObtenido.value = val;
-        if(datoObtenido == +datoObtenido){
-        datoObtenido = parseFloat(datoObtenido);
-        }
-        this.DatosUsuario.push(datoObtenido)
+    obtenerDatos = (evento) => {
+        evento.preventDefault();
+        let usuario = {}
+        usuario.nombre = document.getElementById("username").value;
+        usuario.peso = document.getElementById("userWeight").value;
+        usuario.estatura = document.getElementById("userHeight").value;
+        this.datosUsuario.push(usuario);
     }
 
-    realizarFormula(arr){
-        let resultado = arr[1] / (arr[2] * arr[2]);
-        console.log ("El IMC de " + arr[0] + " es " + resultado );
+    realizarFormula(obj){
+        let resultado = +obj.peso / (+obj.estatura * +obj.estatura);
+        let mensaje1 = document.getElementById("mensaje1"); 
+        mensaje1.innerHTML = ("El IMC de " + obj.nombre + " es " + resultado.toFixed(1) );
         return resultado
+    }
+
+    estadoImc(valorCalculo) {
+        if (valorCalculo <= 16) {
+            return (mensajesResultado.desnutricionSevera)
+        }
+        else if ((valorCalculo >= 16.1) && (valorCalculo <= 18.4 )) {
+            return (mensajesResultado.desnutricionModerada)
+        }
+        else if ((valorCalculo >= 18.5) && (valorCalculo <= 22 )) {
+            return (mensajesResultado.bajoPeso)
+        }
+        else if ((valorCalculo >= 22.1) && (valorCalculo <= 24.9 )) {
+            return (mensajesResultado.pesoNormal)
+        }
+        else if ((valorCalculo >= 25) && (valorCalculo <= 29.9 )) {
+            return (mensajesResultado.sobrepeso)
+        }
+        else if ((valorCalculo >= 30) && (valorCalculo <= 34.9 )) {
+            return (mensajesResultado.obesidadTipo1)
+        }
+        else if ((valorCalculo >= 35) && (valorCalculo <= 39.9 )) {
+            return (mensajesResultado.obesidadTipo2)
+        }
+        else if (valorCalculo >= 40) {
+            return (mensajesResultado.obesidadTipo3)
+        } 
     }
 }
 
@@ -32,43 +59,16 @@ const mensajesResultado = {
     obesidadTipo3: "Su IMC indica obesidad tipo III. Consulte a su médico.",
 }
 
-function estadoImc(valorCalculo) {
-    if (valorCalculo <= 16) {
-        return (mensajesResultado.desnutricionSevera)
-    }
-    else if ((valorCalculo >= 16.1) && (valorCalculo <= 18.4 )) {
-        return (mensajesResultado.desnutricionModerada)
-    }
-    else if ((valorCalculo >= 18.5) && (valorCalculo <= 22 )) {
-        return (mensajesResultado.bajoPeso)
-    }
-    else if ((valorCalculo >= 22.1) && (valorCalculo <= 24.9 )) {
-        return (mensajesResultado.pesoNormal)
-    }
-    
-    else if ((valorCalculo >= 25) && (valorCalculo <= 29.9 )) {
-        return (mensajesResultado.sobrepeso)
-    }
-    
-    else if ((valorCalculo >= 30) && (valorCalculo <= 34.9 )) {
-        return (mensajesResultado.obesidadTipo1)
-    }
-    
-    else if ((valorCalculo >= 35) && (valorCalculo <= 39.9 )) {
-        return (mensajesResultado.obesidadTipo2)
-    }
-    
-    else if (valorCalculo >= 40) {
-        return (mensajesResultado.obesidadTipo3)
-    } 
-}
 
-
-let calculoImc
+let calculoImc;
 let usuario1 = new Datos;
-usuario1.obtenerDatos("username", "Ricardo");
-usuario1.obtenerDatos("userWeight", "85.7");
-usuario1.obtenerDatos("userHeight", "1.76");
-calculoImc = usuario1.realizarFormula(usuario1.DatosUsuario)
 
-console.log(estadoImc(calculoImc))
+
+document.getElementById("form").addEventListener("submit", usuario1.obtenerDatos);
+
+calculoImc = usuario1.realizarFormula(usuario1.datosUsuario[0]);
+usuario1.estadoImc(calculoImc);
+
+
+let mensaje2 = document.getElementById('mensaje2');
+mensaje2.innerHTML = usuario1.estadoImc(calculoImc);
