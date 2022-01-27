@@ -3,8 +3,15 @@ class Datos {
         this.datosUsuario = [];
     }
 
-    obtenerDatos = (evento) => {
+    procesarDatos = (evento) => {
         evento.preventDefault();
+        this.obtenerDatos();
+        calculoImc = this.realizarFormula(this.datosUsuario[0]);
+        this.estadoImc(calculoImc);
+        mensaje2.innerHTML = this.estadoImc(calculoImc);
+    }
+
+    obtenerDatos(){
         let usuario = {}
         usuario.nombre = document.getElementById("username").value;
         usuario.peso = document.getElementById("userWeight").value;
@@ -16,6 +23,9 @@ class Datos {
         let resultado = +obj.peso / (+obj.estatura * +obj.estatura);
         let mensaje1 = document.getElementById("mensaje1"); 
         mensaje1.innerHTML = ("El IMC de " + obj.nombre + " es " + resultado.toFixed(1) );
+        if ($('#mensaje1').val() !== '' || $('#mensaje1').val() !== undefined){
+            $('.messageContainer').show(); 
+        };
         return resultado
     }
 
@@ -63,12 +73,6 @@ const mensajesResultado = {
 let calculoImc;
 let usuario1 = new Datos;
 
-
-document.getElementById("form").addEventListener("submit", usuario1.obtenerDatos);
-
-calculoImc = usuario1.realizarFormula(usuario1.datosUsuario[0]);
-usuario1.estadoImc(calculoImc);
-
-
+document.getElementById("form").addEventListener("submit", usuario1.procesarDatos);
 let mensaje2 = document.getElementById('mensaje2');
-mensaje2.innerHTML = usuario1.estadoImc(calculoImc);
+$('.messageContainer').hide();
