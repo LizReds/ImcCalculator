@@ -75,13 +75,17 @@ p {
   margin-left: 6.9em;
 }
 
-form fieldset button {
+form fieldset .buttonContainer {
+  text-align: center;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+form fieldset .buttonContainer button {
   margin: 0 auto;
   margin-top: 2em;
-  display: flex;
-  justify-content: center;
   padding: 0.5em 1em;
   border-radius: 1em;
+  display: inline-block;
   border-color: #C84B31;
   color: #C84B31;
   background-color: #F6D860;

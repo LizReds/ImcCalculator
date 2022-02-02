@@ -6,7 +6,7 @@ class Datos {
     procesarDatos = (evento) => {
         evento.preventDefault();
         this.obtenerDatos();
-        calculoImc = this.realizarFormula(this.datosUsuario[0]);
+        calculoImc = this.realizarFormula(this.datosUsuario[this.datosUsuario.length - 1]);
         this.estadoImc(calculoImc);
         mensaje2.innerHTML = this.estadoImc(calculoImc);
     }
@@ -17,16 +17,18 @@ class Datos {
         usuario.peso = document.getElementById("userWeight").value;
         usuario.estatura = document.getElementById("userHeight").value;
         this.datosUsuario.push(usuario);
+        let usuarioParaGuardar = JSON.stringify(usuario);
+        localStorage.setItem('datosDeUsuario', usuarioParaGuardar);
     }
 
     realizarFormula(obj){
         let resultado = +obj.peso / (+obj.estatura * +obj.estatura);
-        let mensaje1 = document.getElementById("mensaje1"); 
+        let mensaje1 = document.getElementById("mensaje1");
         mensaje1.innerHTML = ("El IMC de " + obj.nombre + " es " + resultado.toFixed(1) );
         if ($('#mensaje1').val() !== '' || $('#mensaje1').val() !== undefined){
             $('.messageContainer').show(); 
         };
-        return resultado
+        return resultado;
     }
 
     estadoImc(valorCalculo) {
@@ -40,6 +42,9 @@ class Datos {
             return (mensajesResultado.bajoPeso)
         }
         else if ((valorCalculo >= 22.1) && (valorCalculo <= 24.9 )) {
+            $('.messageContainer').css('background', '#9de49a');
+            $('#mensaje1').css('color', '#C84B31');
+            $('#mensaje2').css('color', '#C84B31');
             return (mensajesResultado.pesoNormal)
         }
         else if ((valorCalculo >= 25) && (valorCalculo <= 29.9 )) {
@@ -54,6 +59,26 @@ class Datos {
         else if (valorCalculo >= 40) {
             return (mensajesResultado.obesidadTipo3)
         } 
+    }
+
+    limpiarFormulario(){
+        $('#username').val('');
+        $('#userWeight').val('');
+        $('#userHeight').val('');
+        //Animaciones concatenadas con JQuery
+        $('#mensaje1').fadeOut(2000, () => {
+            $('#mensaje2').fadeOut(2000, () => {
+                $('.messageContainer').slideUp(1000)
+                })
+            });
+        localStorage.removeItem('datosDeUsuario');
+    }
+
+    //Incorporar elementos al DOM con JQuery
+    crearContenidoExtra(){
+        $('.buttonContainer').append('<button id="limpiar">Limpiar</button>');
+        //Método para crear respuesta a evento clic con JQuery
+        $('#limpiar').on('click', this.limpiarFormulario);
     }
 }
 
@@ -72,6 +97,7 @@ const mensajesResultado = {
 
 let calculoImc;
 let usuario1 = new Datos;
+usuario1.crearContenidoExtra();
 
 document.getElementById("form").addEventListener("submit", usuario1.procesarDatos);
 let mensaje2 = document.getElementById('mensaje2');
