@@ -1,4 +1,4 @@
-class Datos {
+class CalculadoraImc {
     constructor(){
         this.datosUsuario = [];
     }
@@ -6,13 +6,15 @@ class Datos {
     procesarDatos = (evento) => {
         evento.preventDefault();
         this.obtenerDatos();
+        //this.obtenerDatosJson();
         calculoImc = this.realizarFormula(this.datosUsuario[this.datosUsuario.length - 1]);
         this.estadoImc(calculoImc);
+        let mensaje2 = document.getElementById('mensaje2');
         mensaje2.innerHTML = this.estadoImc(calculoImc);
     }
 
     obtenerDatos(){
-        let usuario = {}
+        let usuario = {};
         usuario.nombre = document.getElementById("username").value;
         usuario.peso = document.getElementById("userWeight").value;
         usuario.estatura = document.getElementById("userHeight").value;
@@ -26,37 +28,61 @@ class Datos {
         let mensaje1 = document.getElementById("mensaje1");
         mensaje1.innerHTML = ("El IMC de " + obj.nombre + " es " + resultado.toFixed(1) );
         if ($('#mensaje1').val() !== '' || $('#mensaje1').val() !== undefined){
-            $('.messageContainer').show(); 
+            $('.messageContainer').show();
+            $('#mensaje1').fadeIn(2000, () => {
+                $('#mensaje2').fadeIn(2000);
+            })
         };
         return resultado;
     }
 
     estadoImc(valorCalculo) {
         if (valorCalculo <= 16) {
+            $('.messageContainer').css('background', 'tomato');
+            $('#mensaje1').css('color', '#9de49a');
+            $('#mensaje2').css('color', '#9de49a');
             return (mensajesResultado.desnutricionSevera)
         }
         else if ((valorCalculo >= 16.1) && (valorCalculo <= 18.4 )) {
+            $('.messageContainer').css('background', 'LightSalmon');
+            $('#mensaje1').css('color', '#C84B31');
+            $('#mensaje2').css('color', '#C84B31');
             return (mensajesResultado.desnutricionModerada)
         }
         else if ((valorCalculo >= 18.5) && (valorCalculo <= 22 )) {
+            $('.messageContainer').css('background', 'moccasin');
+            $('#mensaje1').css('color', '#C84B31');
+            $('#mensaje2').css('color', '#C84B31');
             return (mensajesResultado.bajoPeso)
         }
         else if ((valorCalculo >= 22.1) && (valorCalculo <= 24.9 )) {
-            $('.messageContainer').css('background', '#9de49a');
+            $('.messageContainer').css('background', 'PaleGreen');
             $('#mensaje1').css('color', '#C84B31');
             $('#mensaje2').css('color', '#C84B31');
             return (mensajesResultado.pesoNormal)
         }
         else if ((valorCalculo >= 25) && (valorCalculo <= 29.9 )) {
+            $('.messageContainer').css('background', 'moccasin');
+            $('#mensaje1').css('color', '#C84B31');
+            $('#mensaje2').css('color', '#C84B31');
             return (mensajesResultado.sobrepeso)
         }
         else if ((valorCalculo >= 30) && (valorCalculo <= 34.9 )) {
+            $('.messageContainer').css('background', 'LightSalmon');
+            $('#mensaje1').css('color', '#C84B31');
+            $('#mensaje2').css('color', '#C84B31');
             return (mensajesResultado.obesidadTipo1)
         }
         else if ((valorCalculo >= 35) && (valorCalculo <= 39.9 )) {
+            $('.messageContainer').css('background', 'tomato');
+            $('#mensaje1').css('color', '#9de49a');
+            $('#mensaje2').css('color', '#9de49a');
             return (mensajesResultado.obesidadTipo2)
         }
         else if (valorCalculo >= 40) {
+            $('.messageContainer').css('background', 'tomato');
+            $('#mensaje1').css('color', '#9de49a');
+            $('#mensaje2').css('color', '#9de49a');
             return (mensajesResultado.obesidadTipo3)
         } 
     }
@@ -80,25 +106,35 @@ class Datos {
         //Método para crear respuesta a evento clic con JQuery
         $('#limpiar').on('click', this.limpiarFormulario);
     }
+    
+    //Obtener datos de un JSON local 
+/*     obtenerDatosJson(){
+        $.get(datosJson, function (response, status){
+            console.log(status);
+            if(status == 'success'){
+                mensajesResultado = response;
+            }else{
+                console.log('No se pudo recuperar la información');
+            }
+        });
+    }; */
 }
 
-
-const mensajesResultado = {
-    desnutricionSevera: "Su IMC indica desnutrición severa. Consulte a su médico.",
-    desnutricionModerada: "Su IMC indica desnutrición moderada. Consulte a su médico.",
-    bajoPeso: "Su IMC indica bajo peso. Consulte a su médico.",
-    pesoNormal: "¡Felicitaciones! Su IMC indica que se encuentra dentro del peso normal.",
-    sobrepeso: "Su IMC indica sobrepeso. Consulte a su médico.",
-    obesidadTipo1:"Su IMC indica obesidad tipo I. Consulte a su médico.",
-    obesidadTipo2:"Su IMC indica obesidad tipo II. Consulte a su médico.",
-    obesidadTipo3: "Su IMC indica obesidad tipo III. Consulte a su médico.",
-}
-
-
+let mensajesResultado;
+const datosJson = './msg.json';
 let calculoImc;
-let usuario1 = new Datos;
-usuario1.crearContenidoExtra();
 
-document.getElementById("form").addEventListener("submit", usuario1.procesarDatos);
-let mensaje2 = document.getElementById('mensaje2');
+//Obtener datos de un JSON local 
+$.get(datosJson, function (response, status){
+    if(status == 'success'){
+        mensajesResultado = response;
+    }else{
+        console.log('No se pudo recuperar la información');
+    };
+})
+
+let calculoUsuario1 = new CalculadoraImc;
+calculoUsuario1.crearContenidoExtra();
+document.getElementById("form").addEventListener("submit", calculoUsuario1.procesarDatos);
+//let mensaje2 = document.getElementById('mensaje2');
 $('.messageContainer').hide();

@@ -1,0 +1,10 @@
+{
+    "desnutricionSevera": "Su IMC indica desnutrición severa. Consulte a su médico.",
+    "desnutricionModerada": "Su IMC indica desnutrición moderada. Consulte a su médico.",
+    "bajoPeso": "Su IMC indica bajo peso. Consulte a su médico.",
+    "pesoNormal": "¡Felicitaciones! Su IMC indica que se encuentra dentro del peso normal.",
+    "sobrepeso": "Su IMC indica sobrepeso. Consulte a su médico.",
+    "obesidadTipo1":"Su IMC indica obesidad tipo I. Consulte a su médico.",
+    "obesidadTipo2":"Su IMC indica obesidad tipo II. Consulte a su médico.",
+    "obesidadTipo3": "Su IMC indica obesidad tipo III. Consulte a su médico."
+}
