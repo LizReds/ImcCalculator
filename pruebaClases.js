@@ -1,16 +1,12 @@
-class CalculadoraImc {
+class ManejoDatos {
     constructor(){
         this.datosUsuario = [];
-        this.obtenerDatosJson();
     }
 
     procesarDatos = (evento) => {
         evento.preventDefault();
         this.obtenerDatos();
-        calculoImc = this.realizarFormula(this.datosUsuario[this.datosUsuario.length - 1]);
-        this.estadoImc(calculoImc);
-        let mensaje2 = document.getElementById('mensaje2');
-        mensaje2.innerHTML = this.estadoImc(calculoImc);
+        this.realizarFormula(this.datosUsuario[this.datosUsuario.length - 1]);
     }
 
     obtenerDatos(){
@@ -23,18 +19,34 @@ class CalculadoraImc {
         localStorage.setItem('datosDeUsuario', usuarioParaGuardar);
     }
 
+    
     realizarFormula(obj){
         let resultado = +obj.peso / (+obj.estatura * +obj.estatura);
         let mensaje1 = document.getElementById("mensaje1");
         mensaje1.innerHTML = ("El IMC de " + obj.nombre + " es " + resultado.toFixed(1) );
-
         if ($('#mensaje1').val() !== '' || $('#mensaje1').val() !== undefined){
             $('.messageContainer').show();
             $('#mensaje1').fadeIn(2000, () => {
                 $('#mensaje2').fadeIn(2000);
             })
-        }
-        return resultado;
+        };
+        calculoImc = resultado;
+    }
+
+
+}
+
+class ManejoHtml {
+    constructor(){
+        
+    }
+
+    mostrarResultado(){
+        //this.estadoImc(calculoImc);
+        let mensaje2 = document.getElementById('mensaje2');
+        mensaje2.innerHTML = this.estadoImc(calculoImc);
+        console.log(mensajesResultado);
+        console.log(calculoImc);
     }
 
     estadoImc(valorCalculo) {
@@ -108,25 +120,36 @@ class CalculadoraImc {
         $('#limpiar').on('click', this.limpiarFormulario);
     }
     
+
+}
+
+class ObtenerJson {
+    constructor (){
+        this.obtenerDatosJson ();
+    }
     //Obtener datos de un JSON local 
     obtenerDatosJson(){
-        $.get(datosJson, function (response, status){
-            console.log(status);
-            if(status == 'success'){
-                mensajesResultado = response;
-            }else{
-                console.log('No se pudo recuperar la información');
-            }
-        });
+    $.get(datosJson, function (response, status){
+        console.log(status);
+        if(status == 'success'){
+            mensajesResultado = response;
+        }else{
+            console.log('No se pudo recuperar la información');
+        }
+    });
     };
 }
 
 let mensajesResultado;
-const datosJson = './msg.json';
+let datosJson = './msg.json';
 let calculoImc;
 
-
-let calculoUsuario1 = new CalculadoraImc;
-calculoUsuario1.crearContenidoExtra();
+let obtenerJson1 = new ObtenerJson;
+//console.log(calculoImc)
+let contenidosHtml = new ManejoHtml;
+let calculoUsuario1 = new ManejoDatos;
 document.getElementById("form").addEventListener("submit", calculoUsuario1.procesarDatos);
+contenidosHtml.crearContenidoExtra();
+contenidosHtml.mostrarResultado();
+//let mensaje2 = document.getElementById('mensaje2');
 $('.messageContainer').hide();
